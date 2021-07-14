@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+
+            <input type="text" id="b_name" placeholder="bookname">
+            <input type="text" id="b_author" placeholder="author">
+            <input type="text" id="b_pages" placeholder="pages">
+            <input type="text" id="b_prize" placeholder="prize">
+            <button onclick="CreateBook()">Create</button>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+</body>
+<script>
+    function CreateBook(){
+    let book_name=b_name.value;
+    let author=b_author.value;
+    let pages=b_pages.value;
+    let prize=b_prize.value;
+    let book={
+    book_name,author,pages,prize
+    }
+    fetch('http://127.0.0.1:8000/api/v1/books', {
+  method: 'POST',
+  body: JSON.stringify(book),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => alert("book created"));
+    }
+</script>
+</html>
